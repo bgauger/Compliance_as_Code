@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--**************************************************************************************
+This file contains answers for known opens and findings that cannot be evaluated through technical means.
+<STIGComments Name> must match the STIG ShortName or Name in STIGList.xml.  When a match is found, this answer file will automatically for the STIG.
+<Vuln ID> is the STIG VulnID.  Multiple Vuln ID sections may be specified in a single Answer File.
+<AnswerKey Name> is the name of the key assigned to the answer.  "DEFAULT" can be used to apply the comment to any asset.  Multiple AnswerKey Name sections may be configured within a single Vuln ID section.
+<ExpectedStatus> is the initial status after the checklist is created.  Valid entries are "Not_Reviewed", "Open", "NotAFinding", and "Not_Applicable".
+<ValidationCode> must be Powershell code that returns a True/False value.  If blank, "true" is assumed.
+<ValidTrueStatus> is the status the check should be set to if ValidationCode returns "true".  Valid entries are "Not_Reviewed", "Open", "NotAFinding", and "Not_Applicable".  If blank, <ExpectedStatus> is assumed.
+<ValidTrueComment> is the verbiage to add to the Comments section if ValidationCode returns "true".
+<ValidFalseStatus> is the status the check should be set to if ValidationCode DOES NOT return "true".  Valid entries are "Not_Reviewed", "Open", "NotAFinding", and "Not_Applicable".  If blank, <ExpectedStatus> is assumed.
+<ValidFalseComment> is the verbiage to add to the Comments section if ValidationCode DOES NOT return "true".
+**************************************************************************************-->
+<STIGComments Name="IIS85Server">
+  <Vuln ID="V-214402">
+    <!--An IIS 8.5 web server behind a load balancer or proxy server, must produce log records containing the source client IP and destination information.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>Not_Reviewed</ValidTrueStatus>
+      <ValidTrueComment>Manually check.  FTC-U is behind a proxy.  FTCloud, FTC-S and FFTT-S are not behind a proxy.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-214405">
+    <!--The log information from the IIS 8.5 web server must be protected from unauthorized modification or deletion.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>Not_Reviewed</ValidTrueStatus>
+      <ValidTrueComment>Manually check.  Review data in the Finding Details section and select status accordingly.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-214406">
+    <!--The log data and records from the IIS 8.5 web server must be backed up onto a different system or media.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Full disk backup of each server is done using VMWare or AWS (depending on hosting environment) snapshot features. Snapshots enable full recovery of system level information including log data.  Snapshots are stored on SAN or AWS S3 respectively.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-214407">
+    <!--The IIS 8.5 web server must not perform user management for hosted applications.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Reference JFFT STIG Policy and Documentation Guidance artifact.  Copy is provided in eMASS and on the JFFT NIPR and SIPR sharepoint portals.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-214408">
+    <!--The IIS 8.5 web server must only contain functions necessary for operation.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Reference JFFT STIG Policy and Documentation Guidance artifact.  Copy is provided in eMASS and on the JFFT NIPR and SIPR sharepoint portals.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-214411">
+    <!--The accounts created by uninstalled features (i.e., tools, utilities, specific, etc.) must be deleted from the IIS 8.5 server.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>Not_Reviewed</ValidTrueStatus>
+      <ValidTrueComment>Manually check.  Review data in the Finding Details section and select status accordingly.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-214412">
+    <!--The IIS 8.5 web server must be reviewed on a regular basis to remove any Operating System features, utility programs, plug-ins, and modules not necessary for operation.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>Not_Reviewed</ValidTrueStatus>
+      <ValidTrueComment>Manually check.  Review data in the Finding Details section and select status accordingly.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-214417">
+    <!--IIS 8.5 Web server accounts accessing the directory tree, the shell, or other operating system functions and utilities must only be administrative accounts.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Reference JFFT STIG Policy and Documentation Guidance artifact.  Copy is provided in eMASS and on the JFFT NIPR and SIPR sharepoint portals.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-214418">
+    <!--The IIS 8.5 web server must separate the hosted applications from hosted web server management functionality.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Reference JFFT STIG Policy and Documentation Guidance artifact.  Copy is provided in eMASS and on the JFFT NIPR and SIPR sharepoint portals.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-214421">
+    <!--The IIS 8.5 web server must augment re-creation to a stable and known baseline..-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Reference JFFT STIG Policy and Documentation Guidance artifact.  Copy is provided in eMASS and on the JFFT NIPR and SIPR sharepoint portals.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-214429">
+    <!--IIS 8.5 web server system files must conform to minimum file permission requirements.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>Not_Reviewed</ValidTrueStatus>
+      <ValidTrueComment>Manually check.  Review data in the Finding Details section and select status accordingly.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-214431">
+    <!--Access to web administration tools must be restricted to the web manager and the web managers designees.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>Not_Reviewed</ValidTrueStatus>
+      <ValidTrueComment>Manually check.  Review data in the Finding Details section and select status accordingly.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-214432">
+    <!--The IIS 8.5 web server must not be running on a system providing any other role.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>Not_Reviewed</ValidTrueStatus>
+      <ValidTrueComment>Manually check.  Review data in the Finding Details section and select status accordingly.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-214438">
+    <!--All accounts installed with the IIS 8.5 web server software and tools must have passwords assigned and default passwords changed.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>Not_Reviewed</ValidTrueStatus>
+      <ValidTrueComment>Manually check.  Review data in the Finding Details section and select status accordingly.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-228573">
+    <!--An IIS Server configured to be a SMTP relay must require authentication.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>Not_Reviewed</ValidTrueStatus>
+      <ValidTrueComment>Manually check.  Review data in the Finding Details section and select status accordingly.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+</STIGComments>

@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--**************************************************************************************
+This file contains answers for known opens and findings that cannot be evaluated through technical means.
+<STIGComments Name> must match the STIG ShortName or Name in STIGList.xml.  When a match is found, this answer file will automatically for the STIG.
+<Vuln ID> is the STIG VulnID.  Multiple Vuln ID sections may be specified in a single Answer File.
+<AnswerKey Name> is the name of the key assigned to the answer.  "DEFAULT" can be used to apply the comment to any asset.  Multiple AnswerKey Name sections may be configured within a single Vuln ID section.
+<ExpectedStatus> is the initial status after the checklist is created.  Valid entries are "Not_Reviewed", "Open", "NotAFinding", and "Not_Applicable".
+<ValidationCode> must be Powershell code that returns a True/False value.  If blank, "true" is assumed.
+<ValidTrueStatus> is the status the check should be set to if ValidationCode returns "true".  Valid entries are "Not_Reviewed", "Open", "NotAFinding", and "Not_Applicable".  If blank, <ExpectedStatus> is assumed.
+<ValidTrueComment> is the verbiage to add to the Comments section if ValidationCode returns "true".
+<ValidFalseStatus> is the status the check should be set to if ValidationCode DOES NOT return "true".  Valid entries are "Not_Reviewed", "Open", "NotAFinding", and "Not_Applicable".  If blank, <ExpectedStatus> is assumed.
+<ValidFalseComment> is the verbiage to add to the Comments section if ValidationCode DOES NOT return "true".
+**************************************************************************************-->
+<STIGComments Name="WinServer2019">
+  <Vuln ID="V-205631">
+    <!--Windows Server 2019 required legal notice must be configured to display before console logon.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Open</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Interactive logon message displaying legal text message. Cannot be displayed for Amazon Workspaces. Dispalying banner would result in the inoperarability of the Workspace. Reference JFFT STIG Policy and Documentation Guidance artifact.  Copy is posted to the eMASS artifact page and the JFFT sharepoint portals on NIPR and SIPR.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+  <Vuln ID="V-205632">
+    <!--Windows Server 2019 title for legal banner dialog box must be configured with the appropriate text.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Reference JFFT STIG Policy and Documentation Guidance artifact.  Copy is posted to the eMASS artifact page and the JFFT sharepoint portals on NIPR and SIPR.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln> 
+  <Vuln ID="V-205671">
+    <!--Windows Server 2019 Access this computer from the network user right must only be assigned to the Administrators and Authenticated Users groups on domain-joined member servers and standalone systems.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Open</ExpectedStatus>
+      <ValidationCode>
+        $Compliant = $true
+        $AllowedSIDs = @("S-1-5-[*]-519", <!-- Enterprise Administrator group-->
+                          "S-1-5-[*]-512", <!-- Domain Administrator group-->
+                          "S-1-5-[*]-113", <!-- Local account-->
+                          "S-1-5-114",
+                          "S-1-5-32-546") <!-- Guest group-->
+        $UserRight = "SeNetworkLogonRight"
+        $SecPolIni = Get-IniContent "$($env:windir)\Temp\Evaluate-STIG\Evaluate-STIG_SecPol.ini"
+        $ResolvedObjects = @()        
+        If ($SecPolIni.'Privilege Rights'.$UserRight) {
+            $AssignedRights = ($SecPolIni.'Privilege Rights'.$UserRight).Replace("*", "") -split ","
+            ForEach ($Object in $AssignedRights) {
+                If ($Object -match "S-1-") {
+                    $objSID = New-Object System.Security.Principal.SecurityIdentifier($Object)
+                    Try {
+                        $ResolvedItem = $objSID.Translate([System.Security.Principal.NTAccount]).Value
+                        $ResolvedObjects += $ResolvedItem
+                        If ($ResolvedItem -notin $AllowedSIDs) {
+                            $Compliant = $false
+                        }
+                    }
+                    Catch {
+                        $Compliant = $false
+                        $ResolvedObjects += $Object
+                    }
+                }
+                Else {
+                    $Compliant = $false
+                    $ResolvedObjects += $Object
+                }
+            }
+        }
+        Else {
+            If ($EmptyAllowed -ne $true) {
+                $Compliant = $false
+            }
+            $ResolvedObjects += "No objects assigned to this right."
+        }
+        Return $Compliant
+      </ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Discovered SIDs are either the BUILTIN\Administrator or an approved Authenticated User.</ValidTrueComment>
+      <ValidFalseStatus>Open</ValidFalseStatus>
+      <ValidFalseComment>One or more listed SIDs is not an approved Authenticated user.</ValidFalseComment>
+    </AnswerKey> 
+  </Vuln>  
+  <Vuln ID="V-205672">
+    <!--Windows Server 2019 Deny access to this computer from the network user right on domain-joined member servers must be configured to prevent access from highly privileged domain accounts and local accounts and from unauthenticated access on all systems.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Open</ExpectedStatus>
+      <ValidationCode>
+        $Compliant = $true
+        $AllowedSIDs = @("S-1-5-[*]-519", <!-- Enterprise Administrator group-->
+                          "S-1-5-[*]-512", <!-- Domain Administrator group-->
+                          "S-1-5-[*]-113", <!-- Local account-->
+                          "S-1-5-114",
+                          "S-1-5-32-546") <!-- Guest group-->
+        $UserRight = "SeDenyNetworkLogonRight"
+        $SecPolIni = Get-IniContent "$($env:windir)\Temp\Evaluate-STIG\Evaluate-STIG_SecPol.ini"
+        $ResolvedObjects = @()        
+        If ($SecPolIni.'Privilege Rights'.$UserRight) {
+            $AssignedRights = ($SecPolIni.'Privilege Rights'.$UserRight).Replace("*", "") -split ","
+            ForEach ($Object in $AssignedRights) {
+                If ($Object -match "S-1-") {
+                    $objSID = New-Object System.Security.Principal.SecurityIdentifier($Object)
+                    Try {
+                        $ResolvedItem = $objSID.Translate([System.Security.Principal.NTAccount]).Value
+                        $ResolvedObjects += $ResolvedItem
+                        If ($ResolvedItem -notin $AllowedSIDs) {
+                            $Compliant = $false
+                        }
+                    }
+                    Catch {
+                        $Compliant = $false
+                        $ResolvedObjects += $Object
+                    }
+                }
+                Else {
+                    $Compliant = $false
+                    $ResolvedObjects += $Object
+                }
+            }
+        }
+        Else {
+            If ($EmptyAllowed -ne $true) {
+                $Compliant = $false
+            }
+            $ResolvedObjects += "No objects assigned to this right."
+        }
+        Return $Compliant
+      </ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Discovered SIDs are either the BUILTIN\Administrator or an approved Authenticated User.</ValidTrueComment>
+      <ValidFalseStatus>Open</ValidFalseStatus>
+      <ValidFalseComment>One or more listed SIDs is not an approved Authenticated user.</ValidFalseComment>
+    </AnswerKey>  
+  </Vuln> 
+  <Vuln ID="V-205673">
+    <!--Windows Server 2019 Deny log on as a batch job user right on domain-joined member servers must be configured to prevent access from highly privileged domain accounts and from unauthenticated access on all systems.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Open</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus></ValidTrueStatus>
+      <ValidTrueComment></ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+  <Vuln ID="V-205675">
+    <!--Windows Server 2019 Deny log on locally user right on domain-joined member servers must be configured to prevent access from highly privileged domain accounts and from unauthenticated access on all systems.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Open</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus></ValidTrueStatus>
+      <ValidTrueComment></ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+  <Vuln ID="V-205676">
+    <!--Windows Server 2019 Allow log on locally user right must only be assigned to the Administrators group.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Open</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus></ValidTrueStatus>
+      <ValidTrueComment></ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+  <Vuln ID="V-205733">
+    <!--Windows Server 2019 Deny log on through Remote Desktop Services user right on domain-joined member servers must be configured to prevent access from highly privileged domain accounts and all local accounts and from unauthenticated access on all systems.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Open</ExpectedStatus>
+      <ValidationCode>
+        $Compliant = $true
+        $AllowedSIDs = @("S-1-5-[*]-519", <!-- Enterprise Administrator group-->
+                          "S-1-5-[*]-512", <!-- Domain Administrator group-->
+                          "S-1-5-[*]-113", <!-- Local account-->
+                          "S-1-5-32-546") <!-- Guest group-->
+        $UserRight = "SeDenyRemoteInteractiveLogonRight"
+        $SecPolIni = Get-IniContent "$($env:windir)\Temp\Evaluate-STIG\Evaluate-STIG_SecPol.ini"
+        $ResolvedObjects = @()        
+        If ($SecPolIni.'Privilege Rights'.$UserRight) {
+            $AssignedRights = ($SecPolIni.'Privilege Rights'.$UserRight).Replace("*", "") -split ","
+            ForEach ($Object in $AssignedRights) {
+                If ($Object -match "S-1-") {
+                    $objSID = New-Object System.Security.Principal.SecurityIdentifier($Object)
+                    Try {
+                        $ResolvedItem = $objSID.Translate([System.Security.Principal.NTAccount]).Value
+                        $ResolvedObjects += $ResolvedItem
+                        If ($ResolvedItem -notin $AllowedSIDs) {
+                            $Compliant = $false
+                        }
+                    }
+                    Catch {
+                        $Compliant = $false
+                        $ResolvedObjects += $Object
+                    }
+                }
+                Else {
+                    $Compliant = $false
+                    $ResolvedObjects += $Object
+                }
+            }
+        }
+        Else {
+            If ($EmptyAllowed -ne $true) {
+                $Compliant = $false
+            }
+            $ResolvedObjects += "No objects assigned to this right."
+        }
+        Return $Compliant
+      </ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Discovered SIDs are either the BUILTIN\Administrator or an approved Authenticated User.</ValidTrueComment>
+      <ValidFalseStatus>Open</ValidFalseStatus>
+      <ValidFalseComment>One or more listed SIDs is not an approved Authenticated user.</ValidFalseComment>
+    </AnswerKey>  
+  </Vuln>
+  <Vuln ID="V-205746">
+    <!-- Windows Server 2019 must only allow administrators responsible for the member server or standalone system to have Administrator rights on the system. -->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode>
+      $Compliant = $true
+        $AllowedSIDs = @("S-1-5-[*]-2135", <!-- SSM user-->
+                          "S-1-5-[*]-1202", <!-- FTCUDMZ\System Administrator-->
+                          "S-1-5-[*]-500") <!-- Administrator (renamed as required by STIGs)-->   
+        $GroupName = "Administrators"
+        $Members = (Get-GroupMembership $GroupName | Select-Object Name, SID, ObjectClass | Sort-Object Name)
+        $FindingDetails += "The following are members of the local $($GroupName) group:" | Out-String
+        $FindingDetails += "==============" | Out-String
+        ForEach ($Object in $Members) {
+            <!-- $FindingDetails += "Name:`t$($Object.Name)" | Out-String-->
+            $FindingDetails += "SID:`t`t$($Object.SID)" | Out-String
+            <!-- $FindingDetails += "Type:`t$($Object.ObjectClass)" | Out-String-->
+            <!-- $FindingDetails += "" | Out-String-->
+        
+            ForEach ($Object in $FindingDetails) {
+                If ($Object -match "S-1-") {
+                    $objSID = New-Object System.Security.Principal.SecurityIdentifier($Object)
+                    Try {
+                        $ResolvedItem = $objSID.Translate([System.Security.Principal.NTAccount]).Value
+                        $ResolvedObjects += $ResolvedItem
+                        If ($ResolvedItem -notin $AllowedSIDs) {
+                            $Compliant = $false
+                        }
+                    }
+                    Catch {
+                        $Compliant = $false
+                        $ResolvedObjects += $Object
+                    }
+                }
+                Else {
+                    $Compliant = $false
+                    $ResolvedObjects += $Object
+                }
+            }
+        }
+        Else {
+            If ($EmptyAllowed -ne $true) {
+                $Compliant = $false
+            }
+            $ResolvedObjects += "No objects assigned to this right."
+        }
+        Return $Compliant
+      
+      </ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Discovered SIDs are approved members of the Administrators group.</ValidTrueComment>
+      <ValidFalseStatus>Open</ValidFalseStatus>
+      <ValidFalseComment>One or more SIDs do not belong in Administrators group.</ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+  <Vuln ID="V-205803">
+    <!-- Windows Server 2019 system files must be monitored for unauthorized changes. -->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Reference JFFT STIG Policy and Documentation Guidance artifact.  Copy is posted to the eMASS artifact page and the JFFT sharepoint portals on NIPR and SIPR.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>    
+  <Vuln ID="V-205848">
+    <!-- Windows Server 2019 domain-joined systems must have a Trusted Platform Module (TPM) enabled and ready for use. -->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Open</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>Open</ValidTrueStatus>
+      <ValidTrueComment>AO Accepted Risk for this vulnerability due to virtualization.  Reference POAM CM-6.5 for Credential Guard which also includes this security check.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+  <Vuln ID="V-205851">
+    <!-- Windows Server 2019 must have a host-based intrusion detection or prevention system. -->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>edc 20MAY2022 - As per JFFT STIG Policy and Documentation Guidance (20220325) HBSS HIDS (or HIPS) is not required on JFFT enclave boundary Network Intrusion Devices (NIDs).</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+  <Vuln ID="V-205856">
+    <!-- Windows Server 2019 systems must have Unified Extensible Firmware Interface (UEFI) firmware and be configured to run in UEFI mode, not Legacy BIOS. -->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Open</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>Open</ValidTrueStatus>
+      <ValidTrueComment>AO Accepted Risk for this vulnerability due to virtualization.  Reference POAM CM-6.5 for Credential Guard which also includes this security check.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+  <Vuln ID="V-205857">
+    <!-- Windows Server 2019 must have Secure Boot enabled. -->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Open</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>Open</ValidTrueStatus>
+      <ValidTrueComment>AO Accepted Risk for this vulnerability due to virtualization.  Reference POAM CM-6.5 for Credential Guard which also includes this security check.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+  <Vuln ID="V-205864">
+    <!-- Windows Server 2019 virtualization-based security must be enabled with the platform security level configured to Secure Boot or Secure Boot with DMA Protection. -->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Open</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>Open</ValidTrueStatus>
+      <ValidTrueComment>AO Accepted Risk for this vulnerability due to virtualization.  Reference POAM CM-6.5 for Credential Guard which also includes this security check.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+  <Vuln ID="V-205907">
+    <!-- Windows Server 2019 must be running Credential Guard on domain-joined member servers. -->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Open</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>Open</ValidTrueStatus>
+      <ValidTrueComment>AO Accepted Risk for this vulnerability due to virtualization.  Reference POAM CM-6.5 for Credential Guard.  Downgrade this check to CAT2 based on following mitigations: The use of Microsoft Local Administrator Password Solution (LAPS), strict password change requirement (60 days or less), Strict separation of roles and duties. Server administrator credentials cannot be used on Windows 10 desktop to administer it. and Boundary Protection that is currently in place to protect from vulnerabilities in the network/servers..</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+  <Vuln ID="V-205661">
+    <!-- Windows Server 2019 manually managed application account passwords must be at least 15 characters in length. -->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Reference JFFT STIG Policy and Documentation Guidance artifact.  Copy is posted to the eMASS artifact page and the JFFT sharepoint portals on NIPR and SIPR</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+  <Vuln ID="V-205677">
+    <!-- Windows Server 2019 must have the roles and features required by the system documented. -->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Reference JFFT STIG Policy and Documentation Guidance artifact.  Copy is posted to the eMASS artifact page and the JFFT sharepoint portals on NIPR and SIPR</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+  <Vuln ID="V-205699">
+    <!-- Windows Server 2019 shared user accounts must not be permitted. -->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Reference JFFT STIG Policy and Documentation Guidance artifact.  Copy is posted to the eMASS artifact page and the JFFT sharepoint portals on NIPR and SIPR</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+  <Vuln ID="V-205727">
+    <!-- Windows Server 2019 systems requiring data at rest protections must employ cryptographic mechanisms to prevent unauthorized disclosure and modification of the information at rest. -->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Reference JFFT STIG Policy and Documentation Guidance artifact.  Copy is posted to the eMASS artifact page and the JFFT sharepoint portals on NIPR and SIPR</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+  <Vuln ID="V-205799">
+    <!-- Windows Server 2019 audit records must be backed up to a different system or media than the system being audited. -->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Reference JFFT STIG Policy and Documentation Guidance artifact.  Copy is posted to the eMASS artifact page and the JFFT sharepoint portals on NIPR and SIPR</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+  <Vuln ID="V-205807">
+    <!-- Windows Server 2019 must employ a deny-all, permit-by-exception policy to allow the execution of authorized software programs. -->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Need to manually validate applocker is enabled and properly configured.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+  <Vuln ID="V-205829">
+    <!-- Windows Server 2019 must implement protection methods such as TLS, encrypted VPNs, or IPsec if the data owner has a strict requirement for ensuring data integrity and confidentiality is maintained at every step of the data transfer and handling process. -->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Reference JFFT STIG Policy and Documentation Guidance artifact.  Copy is posted to the eMASS artifact page and the JFFT sharepoint portals on NIPR and SIPR.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+  <Vuln ID="V-205843">
+    <!-- Windows Server 2019 must, at a minimum, off-load audit records of interconnected systems in real time and off-load standalone systems weekly. -->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Reference JFFT STIG Policy and Documentation Guidance artifact.  Copy is posted to the eMASS artifact page and the JFFT sharepoint portals on NIPR and SIPR.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+  <Vuln ID="V-205844">
+    <!-- Windows Server 2019 users with Administrative privileges must have separate accounts for administrative duties and normal operational tasks. -->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Reference JFFT STIG Policy and Documentation Guidance artifact.  Copy is posted to the eMASS artifact page and the JFFT sharepoint portals on NIPR and SIPR.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+  <Vuln ID="V-205845">
+    <!-- Windows Server 2019 administrative accounts must not be used with applications that access the Internet, such as web browsers, or with potential Internet sources, such as email. -->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Reference JFFT STIG Policy and Documentation Guidance artifact.  Copy is posted to the eMASS artifact page and the JFFT sharepoint portals on NIPR and SIPR.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+  <Vuln ID="V-205847">
+    <!-- Windows Server 2019 manually managed application account passwords must be changed at least annually or when a system administrator with knowledge of the password leaves the organization. -->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Reference JFFT STIG Policy and Documentation Guidance artifact.  Copy is posted to the eMASS artifact page and the JFFT sharepoint portals on NIPR and SIPR.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+</STIGComments>

@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--**************************************************************************************
+This file contains answers for known opens and findings that cannot be evaluated through technical means.
+<STIGComments Name> must match the STIG ShortName or Name in STIGList.xml.  When a match is found, this answer file will automatically for the STIG.
+<Vuln ID> is the STIG VulnID.  Multiple Vuln ID sections may be specified in a single Answer File.
+<AnswerKey Name> is the name of the key assigned to the answer.  "DEFAULT" can be used to apply the comment to any asset.  Multiple AnswerKey Name sections may be configured within a single Vuln ID section.
+<ExpectedStatus> is the initial status after the checklist is created.  Valid entries are "Not_Reviewed", "Open", "NotAFinding", and "Not_Applicable".
+<ValidationCode> must be Powershell code that returns a True/False value.  If blank, "true" is assumed.
+<ValidTrueStatus> is the status the check should be set to if ValidationCode returns "true".  Valid entries are "Not_Reviewed", "Open", "NotAFinding", and "Not_Applicable".  If blank, <ExpectedStatus> is assumed.
+<ValidTrueComment> is the verbiage to add to the Comments section if ValidationCode returns "true".
+<ValidFalseStatus> is the status the check should be set to if ValidationCode DOES NOT return "true".  Valid entries are "Not_Reviewed", "Open", "NotAFinding", and "Not_Applicable".  If blank, <ExpectedStatus> is assumed.
+<ValidFalseComment> is the verbiage to add to the Comments section if ValidationCode DOES NOT return "true".
+**************************************************************************************-->
+<STIGComments Name="SQL2016Instance">
+  <Vuln ID="V-213929">
+    <!--SQL Server must limit the number of concurrent sessions to an organization-defined number per user for all accounts and/or account types.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>Not_Reviewed</ValidTrueStatus>
+      <ValidTrueComment>Reference JFFT STIG Policy and Documentation Guidance artifact for approved number of concurrent sessions.  Copy is provided in eMASS and on the JFFT NIPR and SIPR sharepoint portals.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-213930">
+    <!--SQL Server must integrate with an organization-level authentication/access mechanism providing account management and automation for all users, groups, roles, and any other principals.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Reference JFFT STIG Policy and Documentation Guidance artifact.  Copy is provided in eMASS and on the JFFT NIPR and SIPR sharepoint portals.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-213932">
+    <!--SQL Server must enforce approved authorizations for logical access to information and system resources in accordance with applicable access control policies.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Reference JFFT STIG Policy and Documentation Guidance artifact.  Copy is provided in eMASS and on the JFFT NIPR and SIPR sharepoint portals.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-213933">
+    <!--SQL Server must protect against a user falsely repudiating by ensuring all accounts are individual, unique, and not shared.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Reference JFFT STIG Policy and Documentation Guidance artifact.  Copy is provided in eMASS and on the JFFT NIPR and SIPR sharepoint portals.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-213941">
+    <!--SQL Server must include additional, more detailed, organization-defined information in the audit records for audit events identified by type, location, or subject.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Reference JFFT STIG Policy and Documentation Guidance artifact.  Copy is provided in eMASS and on the JFFT NIPR and SIPR sharepoint portals.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-213951">
+    <!--SQL Server must limit privileges to change software modules, to include stored procedures, functions and triggers, and links to software external to SQL Server.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>Not_Reviewed</ValidTrueStatus>
+      <ValidTrueComment>Manually verify using check text.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-213955">
+    <!--Unused database components, DBMS software, and database objects must be removed.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>Not_Reviewed</ValidTrueStatus>
+      <ValidTrueComment>Manually verify using check text.  JFFT configuration manager maintains DB server baselines for to the feature listing.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-213956">
+    <!--Unused database components that are integrated in SQL Server and cannot be uninstalled must be disabled.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>Not_Reviewed</ValidTrueStatus>
+      <ValidTrueComment>Manually verify using EvalSTIG Finding Details.  JFFT configuration manager maintains DB server baselines for to the feature listing.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-213963">
+    <!--SQL Server must uniquely identify and authenticate organizational users (or processes acting on behalf of organizational users).-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Reference JFFT STIG Policy and Documentation Guidance artifact.  Copy is provided in eMASS and on the JFFT NIPR and SIPR sharepoint portals.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-213970">
+    <!--SQL Server must uniquely identify and authenticate organizational users (or processes acting on behalf of organizational users).-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>Not_Reviewed</ValidTrueStatus>
+      <ValidTrueComment>Manually verify using EvalSTIG Finding Details.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-213972">
+    <!--SQL Server must protect the confidentiality and integrity of all information at rest.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode>$Severity = 'CAT_II'
+                      Return Send-Checkresult -Severity $([String]$Severity)
+      </ValidationCode>
+      <ValidTrueStatus>Not_Reviewed</ValidTrueStatus>
+      <ValidTrueComment>Manually verify that full disk encryption is being used.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-213973">
+    <!--The Service Master Key must be backed up, stored offline and off-site.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Reference the JFFT DB SOP for frequency, location, and procedures for backing up DB Service Master Keys.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-213974">
+    <!--The Master Key must be backed up, stored offline and off-site.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Reference the JFFT DB SOP for frequency, location, and procedures for backing up DB Master Keys.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-213978">
+    <!--SQL Server must reveal detailed error messages only to the ISSO, ISSM, SA, and DBA.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>Not_Reviewed</ValidTrueStatus>
+      <ValidTrueComment>Manually verify using EvalSTIG Finding Details.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-213979">
+    <!--SQL Server must prevent non-privileged users from executing privileged functions, to include disabling, circumventing, or altering implemented security safeguards/countermeasures.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>Not_Reviewed</ValidTrueStatus>
+      <ValidTrueComment>Manually verify using check text procedures.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-213981">
+    <!--SQL Server must utilize centralized management of the content captured in audit records generated by all components of SQL Server.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>Not_Reviewed</ValidTrueStatus>
+      <ValidTrueComment>Manually verify that DB audit records are offloaded to Cloudwatch Logs or Splunk as required by JFFT policy. Reference JFFT STIG Policy and Documentation Guidance artifact.  Copy is provided in eMASS and on the JFFT NIPR and SIPR sharepoint portals.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-213982">
+    <!--SQL Server must provide centralized configuration of the content to be captured in audit records generated by all components of SQL Server.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>Not_Reviewed</ValidTrueStatus>
+      <ValidTrueComment>Manually verify that DB audit records are offloaded to Cloudwatch Logs or Splunk as required by JFFT policy. Reference JFFT STIG Policy and Documentation Guidance artifact.  Copy is provided in eMASS and on the JFFT NIPR and SIPR sharepoint portals.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-213984">
+    <!--SQL Server must provide a warning to appropriate support staff when allocated audit record storage volume reaches 75% of maximum audit record storage capacity.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>Open</ValidTrueStatus>
+      <ValidTrueComment>Alert does not yet exist.  Need to set up notification in AWS console using status monitor or cloudwatch metrics.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-213985">
+    <!--SQL Server must provide an immediate real-time alert to appropriate support staff of all audit log failures.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>Not_Reviewed</ValidTrueStatus>
+      <ValidTrueComment>Manually verify that this alert is still firing.  It was set up to be monitored at the server level as required by the OS STIG.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-213988">
+    <!--Windows must enforce access restrictions associated with changes to the configuration of the SQL Server instance.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>Not_Reviewed</ValidTrueStatus>
+      <ValidTrueComment>Manually verify using check text procedures.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-213993">
+    <!--When updates are applied to SQL Server software, any software components that have been replaced or made unnecessary must be removed.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>Not_Reviewed</ValidTrueStatus>
+      <ValidTrueComment>Manually verify using Evaluate-STIG results in Finding Details section.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-213994">
+    <!--Security-relevant software updates to SQL Server must be installed within the time period directed by an authoritative source (e.g. IAVM, CTOs, DTMs, and STIGs).-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>Not_Reviewed</ValidTrueStatus>
+      <ValidTrueComment>Manually verify using Evaluate-STIG results in Finding Details section.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-214025">
+    <!--The system SQL Server must off-load audit data to a separate log management facility; this must be continuous and in near real time for systems with a network connection to the storage facility and weekly or more often for stand-alone systems.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>Not_Reviewed</ValidTrueStatus>
+      <ValidTrueComment>Manually verify that DB audit records are offloaded to Cloudwatch Logs or Splunk as required by JFFT policy. Reference JFFT STIG Policy and Documentation Guidance artifact.  Copy is provided in eMASS and on the JFFT NIPR and SIPR sharepoint portals.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-214027">
+    <!-- SQL Server must configure SQL Server Usage and Error Reporting Auditing.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>Not_Reviewed</ValidTrueStatus>
+      <ValidTrueComment>Manually verify using Evaluate-STIG results in Finding Details section.  Telemetry data transmission is not authorized.  Remove the service is found.  Reference JFFT STIG Policy and Documentation Guidance artifact.  Copy is provided in eMASS and on the JFFT NIPR and SIPR sharepoint portals.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-214045">
+    <!--When using command-line tools such as SQLCMD in a mixed-mode authentication environment, users must use a logon method that does not expose the password.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>JFFT prohibits the use of SQLCMD as stated in the JFFT AUP Addendum. All users review and acknowledge this policy annually.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-214046">
+    <!-- Applications must obscure feedback of authentication information during the authentication process to protect the information from possible exploitation/use by unauthorized individuals.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>All applications obfuscate password and PIN during input.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+</STIGComments>

@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--**************************************************************************************
+This file contains answers for known opens and findings that cannot be evaluated through technical means.
+<STIGComments Name> must match the STIG ShortName or Name in STIGList.xml.  When a match is found, this answer file will automatically for the STIG.
+<Vuln ID> is the STIG VulnID.  Multiple Vuln ID sections may be specified in a single Answer File.
+<AnswerKey Name> is the name of the key assigned to the answer.  "DEFAULT" can be used to apply the comment to any asset.  Multiple AnswerKey Name sections may be configured within a single Vuln ID section.
+<ExpectedStatus> is the initial status after the checklist is created.  Valid entries are "Not_Reviewed", "Open", "NotAFinding", and "Not_Applicable".
+<ValidationCode> must be Powershell code that returns a True/False value.  If blank, "true" is assumed.
+<ValidTrueStatus> is the status the check should be set to if ValidationCode returns "true".  Valid entries are "Not_Reviewed", "Open", "NotAFinding", and "Not_Applicable".  If blank, <ExpectedStatus> is assumed.
+<ValidTrueComment> is the verbiage to add to the Comments section if ValidationCode returns "true".
+<ValidFalseStatus> is the status the check should be set to if ValidationCode DOES NOT return "true".  Valid entries are "Not_Reviewed", "Open", "NotAFinding", and "Not_Applicable".  If blank, <ExpectedStatus> is assumed.
+<ValidFalseComment> is the verbiage to add to the Comments section if ValidationCode DOES NOT return "true".
+**************************************************************************************-->
+<STIGComments Name="ADDomain">
+
+  <Vuln ID="V-243466">
+    <!--Membership to the Enterprise Admins group must be restricted to accounts used only to manage the Active Directory Forest.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>Not_Reviewed</ValidTrueStatus>
+      <ValidTrueComment>Manually review for compliance.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-243467">
+    <!--Membership to the Domain Admins group must be restricted to accounts used only to manage the Active Directory domain and domain controllers.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>JFFT limits Domain Admin Group membership to domain administrators.  Reference the JFFT Authorized Accounts Register (AAReg) for list of authorized domain administrators.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-243468">
+    <!--Membership to the Domain Admins group must be restricted to accounts used only to manage the Active Directory domain and domain controllers.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>JFFT requires domain administrators have separate accounts for domain administration.  Reference the JFFT Authorized Accounts Register (AAReg) for list of authorized domain administrators and AD DomainAdmins group for list of accounts.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-243469">
+    <!--Membership to the Domain Admins group must be restricted to accounts used only to manage the Active Directory domain and domain controllers.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>JFFT requires workstation administrators have separate accounts for workstation administration.  Reference the JFFT Authorized Accounts Register (AAReg) for list of authorized workstation administrators and AD WorkstationAdmin group for list of accounts.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-243470">
+    <!--Delegation of privileged accounts must be prohibited.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>Not_Reviewed</ValidTrueStatus>
+      <ValidTrueComment>Manually verify compliance.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-243472">
+    <!--Separate smart cards must be used for Enterprise Admin (EA) and Domain Admin (DA) accounts from smart cards used for other accounts.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>JFFT issues separate smartcards for each adminstrative role.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-243473">
+    <!--Separate domain accounts must be used to manage public facing servers from any domain accounts used to manage internal servers.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>NotAFinding</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>JFFT separates internal and DMZ domains.  Each domain has separate and unique accounts for managing servers inside its boundary.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-243479">
+    <!--The Directory Service Restore Mode (DSRM) password must be changed at least annually.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>NotAFinding</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>JFFT requires DSRM password be changed annually in conjunction with the enclave's annual security assessment.  Reference the JFFT Access Control (AC) security control artifact (AC-2) and the JFFT Account Management SOP.  Copy is provided in eMASS and on the JFFT NIPR and SIPR sharepoint portals.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-243481">
+    <!--Access to need-to-know information must be restricted to an authorized community of interest.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>NotAFinding</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Access to need-to-know information must be restricted to an authorized community of interest.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-243482">
+    <!--Interconnections between DoD directory services of different classification levels must use a cross-domain solution that is approved for use with inter-classification trusts.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>NotAFinding</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Reference JFFT STIG Policy and Documentation Guidance artifact.  Copy is provided in eMASS and on the JFFT NIPR and SIPR sharepoint portals.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-243483">
+    <!--Interconnections between DoD directory services of different classification levels must use a cross-domain solution that is approved for use with inter-classification trusts.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>NotAFinding</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Reference JFFT STIG Policy and Documentation Guidance artifact.  Copy is provided in eMASS and on the JFFT NIPR and SIPR sharepoint portals.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-243488">
+    <!--User accounts with delegated authority must be removed from Windows built-in administrative groups or remove the delegated authority from the accounts.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>NotAFinding</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Reference JFFT STIG Policy and Documentation Guidance artifact.  Copy is provided in eMASS and on the JFFT NIPR and SIPR sharepoint portals.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-243493">
+    <!--Active Directory data must be backed up daily for systems with a Risk Management Framework categorization for Availability of moderate or high. Systems with a categorization of low must be backed up weekly.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>NotAFinding</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>JFFT Test and Development Enclaves (TDEs) are categorized Low for Availability.  All TDE servers including domain controllers are backed up using VMware or AWS Snapshots.  Each Snapshot is a complete backup of all server drives.  Reference the JFFT Continuity Plan (CP) security controls artifact for details.  Copy is provided in eMASS and on the JFFT NIPR and SIPR sharepoint portals..</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-243494">
+    <!--Each cross-directory authentication configuration must be documented.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>NotAFinding</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Reference JFFT STIG Policy and Documentation Guidance artifact.  Copy is provided in eMASS and on the JFFT NIPR and SIPR sharepoint portals.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-243495">
+    <!--Each cross-directory authentication configuration must be documented.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>NotAFinding</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>Not_Applicable</ValidTrueStatus>
+      <ValidTrueComment>Reference JFFT STIG Policy and Documentation Guidance artifact.  Copy is provided in eMASS and on the JFFT NIPR and SIPR sharepoint portals.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-243498">
+    <!--Each cross-directory authentication configuration must be documented.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>NotAFinding</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>Not_Applicable</ValidTrueStatus>
+      <ValidTrueComment>Reference JFFT STIG Policy and Documentation Guidance artifact.  Copy is provided in eMASS and on the JFFT NIPR and SIPR sharepoint portals.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-243499">
+    <!--Each cross-directory authentication configuration must be documented.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>NotAFinding</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>Not_Applicable</ValidTrueStatus>
+      <ValidTrueComment>Reference JFFT STIG Policy and Documentation Guidance artifact.  Copy is provided in eMASS and on the JFFT NIPR and SIPR sharepoint portals.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-243501">
+    <!--Each cross-directory authentication configuration must be documented.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>NotAFinding</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>Not_Applicable</ValidTrueStatus>
+      <ValidTrueComment>Reference JFFT STIG Policy and Documentation Guidance artifact.  Copy is provided in eMASS and on the JFFT NIPR and SIPR sharepoint portals.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+</STIGComments>

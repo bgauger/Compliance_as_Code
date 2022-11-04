@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--**************************************************************************************
+This file contains answers for known opens and findings that cannot be evaluated through technical means.
+<STIGComments Name> must match the STIG ShortName or Name in STIGList.xml.  When a match is found, this answer file will automatically for the STIG.
+<Vuln ID> is the STIG VulnID.  Multiple Vuln ID sections may be specified in a single Answer File.
+<AnswerKey Name> is the name of the key assigned to the answer.  "DEFAULT" can be used to apply the comment to any asset.  Multiple AnswerKey Name sections may be configured within a single Vuln ID section.
+<ExpectedStatus> is the initial status after the checklist is created.  Valid entries are "Not_Reviewed", "Open", "NotAFinding", and "Not_Applicable".
+<ValidationCode> must be Powershell code that returns a True/False value.  If blank, "true" is assumed.
+<ValidTrueStatus> is the status the check should be set to if ValidationCode returns "true".  Valid entries are "Not_Reviewed", "Open", "NotAFinding", and "Not_Applicable".  If blank, <ExpectedStatus> is assumed.
+<ValidTrueComment> is the verbiage to add to the Comments section if ValidationCode returns "true".
+<ValidFalseStatus> is the status the check should be set to if ValidationCode DOES NOT return "true".  Valid entries are "Not_Reviewed", "Open", "NotAFinding", and "Not_Applicable".  If blank, <ExpectedStatus> is assumed.
+<ValidFalseComment> is the verbiage to add to the Comments section if ValidationCode DOES NOT return "true".
+**************************************************************************************-->
+<STIGComments Name="SQL2016DB">
+  <Vuln ID="V-213901">
+    <!--SQL Server must enforce approved authorizations for logical access to information and system resources in accordance with applicable access control policies.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Reference JFFT STIG Policy and Documentation Guidance artifact.  Copy is provided in eMASS and on the JFFT NIPR and SIPR sharepoint portals.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-213902">
+    <!--SQL Server must protect against a user falsely repudiating by ensuring only clearly unique Active Directory user accounts can connect to the database.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>SQL query as described in Check Content return no users. Secondary check via PowerShell command for discovered users does not return account information.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-213903">
+    <!--SQL Server must protect against a user falsely repudiating by ensuring all accounts are individual, unique, and not shared.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Reference JFFT STIG Policy and Documentation Guidance artifact.  Copy is provided in eMASS and on the JFFT NIPR and SIPR sharepoint portals.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-213904">
+    <!--SQL Server must protect against a user falsely repudiating by ensuring databases are not in a trust relationship.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Trustworthy is only enabled on MSDB. All other databases have Trustworthy disabled.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-213910">
+    <!--In the event of a system failure, hardware loss or disk failure, SQL Server must be able to restore necessary databases with least disruption to mission processes.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Manually verify using check text.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-213913">
+    <!--The Certificate used for encryption must be backed up, stored offline and off-site.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>Open</ValidTrueStatus>
+      <ValidTrueComment>Need to develop SOP for backing up and storing off-site, encryption key along with Master Key and Service Master Key.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-213914">
+    <!--SQL Server must isolate security functions from non-security functions.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>Not_Reviewed</ValidTrueStatus>
+      <ValidTrueComment>Manually verify using check text</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-213915">
+    <!--Database contents must be protected from unauthorized and unintended information transfer by enforcement of a data-transfer policy.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>Open</ValidTrueStatus>
+      <ValidTrueComment>Need to add this practice to the JFFT Software Development Plan.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-213916">
+    <!--SQL Server must check the validity of all data inputs except those specifically identified by the organization.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>Not_Reviewed</ValidTrueStatus>
+      <ValidTrueComment>Manually verify using check text.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-213917">
+    <!--SQL Server must provide non-privileged users with error messages that provide information necessary for corrective actions without revealing information that could be exploited by adversaries.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>Not_Reviewed</ValidTrueStatus>
+      <ValidTrueComment>Manually verify using check text.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-213918">
+    <!--SQL Server must associate organization-defined types of security labels having organization-defined security label values with information in storage.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Security labeling is not required.  Reference JFFT STIG Policy and Documentation Guidance artifact.  Copy is provided in eMASS and on the JFFT NIPR and SIPR sharepoint portals.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-213919">
+    <!--SQL Server must associate organization-defined types of security labels having organization-defined security label values with information in process.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Security labeling is not required.  Reference JFFT STIG Policy and Documentation Guidance artifact.  Copy is provided in eMASS and on the JFFT NIPR and SIPR sharepoint portals.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-213920">
+    <!--SQL Server must associate organization-defined types of security labels having organization-defined security label values with information in transmission.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Security labeling is not required.  Reference JFFT STIG Policy and Documentation Guidance artifact.  Copy is provided in eMASS and on the JFFT NIPR and SIPR sharepoint portals.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-213926">
+    <!--SQL Server must implement cryptographic mechanisms to prevent unauthorized modification of organization-defined information at rest (to include, at a minimum, PII and classified information) on organization-defined information system components.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Encryption of unclassified Data at Rest is not required.  Reference JFFT STIG Policy and Documentation Guidance artifact.  Copy is provided in eMASS and on the JFFT NIPR and SIPR sharepoint portals.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-213927">
+    <!--SQL Server must implement cryptographic mechanisms preventing the unauthorized disclosure of organization-defined information at rest on organization-defined information system components.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Encryption of unclassified Data at Rest is not required.  Reference JFFT STIG Policy and Documentation Guidance artifact.  Copy is provided in eMASS and on the JFFT NIPR and SIPR sharepoint portals.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-251040">
+    <!--SQL Server must use NSA-approved cryptography to protect classified information in accordance with the data owners requirements.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>Not_Reviewed</ValidTrueStatus>
+      <ValidTrueComment>Manually verify using check text.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+</STIGComments>

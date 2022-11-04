@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--**************************************************************************************
+This file contains answers for known opens and findings that cannot be evaluated through technical means.
+<STIGComments Name> must match the STIG ShortName or Name in STIGList.xml.  When a match is found, this answer file will automatically for the STIG.
+<Vuln ID> is the STIG VulnID.  Multiple Vuln ID sections may be specified in a single Answer File.
+<AnswerKey Name> is the name of the key assigned to the answer.  "DEFAULT" can be used to apply the comment to any asset.  Multiple AnswerKey Name sections may be configured within a single Vuln ID section.
+<ExpectedStatus> is the initial status after the checklist is created.  Valid entries are "Not_Reviewed", "Open", "NotAFinding", and "Not_Applicable".
+<ValidationCode> must be Powershell code that returns a True/False value.  If blank, "true" is assumed.
+<ValidTrueStatus> is the status the check should be set to if ValidationCode returns "true".  Valid entries are "Not_Reviewed", "Open", "NotAFinding", and "Not_Applicable".  If blank, <ExpectedStatus> is assumed.
+<ValidTrueComment> is the verbiage to add to the Comments section if ValidationCode returns "true".
+<ValidFalseStatus> is the status the check should be set to if ValidationCode DOES NOT return "true".  Valid entries are "Not_Reviewed", "Open", "NotAFinding", and "Not_Applicable".  If blank, <ExpectedStatus> is assumed.
+<ValidFalseComment> is the verbiage to add to the Comments section if ValidationCode DOES NOT return "true".
+**************************************************************************************-->
+<STIGComments Name="WinServer2012DC">
+
+  <Vuln ID="V-226029">
+    <!--Server systems must be located in a controlled access area, accessible only to authorized personnel.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>All JFFT systems are located in controlled access areas.  Reference the JFFT Physical and Environmental (PE) security artifact.  Copy is provided on eMASS and the JFFT NIPR and SIPR sharepoint portals.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-226030">
+    <!--Users with administrative privilege must be documented.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>All users and their privileges are listed on the JFFT Authorized Accounts Register (AAReg).  AAReg is approved by the JFFT ISSM. Copy is provided on eMASS and the JFFT NIPR sharepoint portal.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-226031">
+    <!--Users with Administrative privileges must have separate accounts for administrative duties and normal operational tasks.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Reference JFFT STIG Policy and Documentation Guidance artifact.  Copy is provided in eMASS and on the JFFT NIPR and SIPR sharepoint portals.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-226032">
+    <!--Policy must require that system administrators (SAs) be trained for the operating systems used by systems under their control.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Reference JFFT STIG Policy and Documentation Guidance artifact.  Copy is provided in eMASS and on the JFFT NIPR and SIPR sharepoint portals.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-226034">
+    <!--Administrative accounts must not be used with applications that access the Internet, such as web browsers, or with potential Internet sources, such as email.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>JFFT prohibits and trains privileged users to not use privileged accounts to access the Internet.  Reference JFFT Access Control (AC) security controls artifact, security control AC-6(2) for the policy.  Copy is provided in eMASS and on the JFFT NIPR and SIPR sharepoint portals.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-226037">
+    <!--Policy must require application account passwords be at least 15 characters in length.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>JFFT requires application passwords be at least 15 characters. in length.  Reference JFFT Access Control (AC) security control artifact (AC-2) and the JFFT Account Management SOP for the policy.  Copy is provided in eMASS and on the JFFT NIPR and SIPR sharepoint portals.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-226038">
+    <!--Windows 2012/2012 R2 manually managed application account passwords must be changed at least annually or when a system administrator with knowledge of the password leaves the organization.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>JFFT requires application passwords be changed annually.  Reference JFFT Access Control (AC) security control artifact (AC-2) and the JFFT Account Management SOP for the policy.  Copy is provided in eMASS and on the JFFT NIPR and SIPR sharepoint portals.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-226039">
+    <!--Shared user accounts must not be permitted on the system.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Reference JFFT STIG Policy and Documentation Guidance artifact.  Copy is provided in eMASS and on the JFFT NIPR and SIPR sharepoint portals.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-226041">
+    <!--System-level information must be backed up in accordance with local recovery time and recovery point objectives.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Recovery time and objectives are documented in the JFFT Continuity Planning (CP) security control artifact (CP-2) and the JFFT Disaster Recovery Plan (DRP).  Full disk backup of each server is done using VMWare or AWS (depending on hosting environment) snapshot features. Snapshots enable full recovery of system level information.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-226042">
+    <!--User-level information must be backed up in accordance with local recovery time and recovery point objectives.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Recovery time and objectives are documented in the JFFT Continuity Planning (CP) security control artifact (CP-2) and the JFFT Disaster Recovery Plan (DRP).  Full disk backup of each server is done using VMWare or AWS (depending on hosting environment) snapshot features. Snapshots enable full recovery of user-level informtion.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-226043">
+    <!--Backups of system-level information must be protected.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>JFFT backups are protected using same Confidentiality, Integrity, and Availbility (CIA) requirements as the rest of the enclaves' technical architecture.  CIA categorization is approved by the AO and the entire JFFT cybersecurity program is built to meet those requirements.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-226044">
+    <!--System-related documentation must be backed up in accordance with local recovery time and recovery point objectives.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>Recovery time and objectives are documented in the JFFT Continuity Planning (CP) security control artifact (CP-2) and the JFFT Disaster Recovery Plan (DRP).  System-related documentation is specifically addressed in the DRP.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-226046">
+    <!--Protection methods such as TLS, encrypted VPNs, or IPSEC must be implemented if the data owner has a strict requirement for ensuring data integrity and confidentiality is maintained at every step of the data transfer and handling process.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>JFFT does not have a strict requirement for protecting data transfers.  However, JFFT does implement encryption (i.e. TLS, VPNs, IPSEC) for to the maximum extent possible to accomodeate DOD and Army protection requiremements and PPSM compliance.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-226047">
+    <!--Systems requiring data at rest protections must employ cryptographic mechanisms to prevent unauthorized disclosure and modification of the information at rest.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>JFFT systems do not require additional encryption protection due to inadequate physical protection.  All JFFT systems and information is stored in DoD or AWS facilities that comply with DoD and Army physical protection requirements.  Reference JFFT Physical and Envrionmental (PE) security controls artifact for details.  Copy is provided in eMASS and on the JFFT NIPR and SIPR sharepoint portals.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-226080">
+    <!--Systems requiring data at rest protections must employ cryptographic mechanisms to prevent unauthorized disclosure and modification of the information at rest.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>JFFT Domain Controllers are classified at same level as the network.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-226122">
+    <!--Audit data must be retained for at least one year.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>JFFT requires audit data be retained for one year.  Reference JFFT Auditing (AU) security control artifact (AU-11) for details.  Copy is provided in eMASS and on the JFFT NIPR and SIPR sharepoint portals.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-226123">
+    <!--Audit records must be backed up onto a different system or media than the system being audited.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>JFFT requires audit data be backed up to Splunk or AWS cloudwatch Logs.  Reference JFFT Auditing (AU) security control artifact (AU-4(1)) for details.  Copy is provided in eMASS and on the JFFT NIPR and SIPR sharepoint portals.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-226124">
+    <!--The operating system must, at a minimum, off-load audit records of interconnected systems in real time and off-load standalone systems weekly.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>JFFT requires audit data be backed up in real-time to Splunk or AWS cloudwatch Logs.  Reference JFFT Auditing (AU) security control artifact (AU-4(1)) for details.  Copy is provided in eMASS and on the JFFT NIPR and SIPR sharepoint portals.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-226238">
+    <!--Only administrators responsible for the domain controller must have Administrator rights on the system.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>JFFT only authorized administrators access to member servers if they are certified and appointed as required by DODM 8570.  Reference the JFFT Authorized Accounts Register (AAReg) for list individuals with administrative privileges.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-225428">
+    <!--System files must be monitored for unauthorized changes.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>JFFT systems monitor for unauthorized changes to executable files.  AESS Policy Auditor and File Integrity Monitor (FIM) are deployed to servers on all JFFT domains.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-226252">
+    <!-- Necessary services must be documented to maintain a baseline to determine if additional, unnecessary services have been added to a system.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>All necessary services for each JFFT server are documented in its corresponding configuration baseline.  The JFFT Configuration Manager maintains the baselines and can provide copy upon request. Contact Kevin Deardorff.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-226255">
+    <!--The system must support automated patch management tools to facilitate flaw remediation.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>All JFFT systems support automated patch management.  JFFT uses MS SCCM and WSUS to automate patching.  Reference JFFT System Integrity (SI) security control artifact (SI-2) for JFFT policy on flaw remediation and the JFFT Patch Management SOP.  Copy is provided in eMASS and on the JFFT NIPR and SIPR sharepoint portals.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-226256">
+    <!--The system must support automated patch management tools to facilitate flaw remediation.-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>All JFFT systems are configured with Axway Desktop Validator software.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+
+  <Vuln ID="V-226266">
+    <!--PKI certificates associated with user accounts must be issued by the DoD PKI or an approved External Certificate Authority (ECA).-->
+    <AnswerKey Name="DEFAULT">
+      <ExpectedStatus>Not_Reviewed</ExpectedStatus>
+      <ValidationCode></ValidationCode>
+      <ValidTrueStatus>NotAFinding</ValidTrueStatus>
+      <ValidTrueComment>All JFFT PKI certfificates are obtained through Army RA and issued by DoD CA.</ValidTrueComment>
+      <ValidFalseStatus></ValidFalseStatus>
+      <ValidFalseComment></ValidFalseComment>
+    </AnswerKey>
+  </Vuln>
+</STIGComments>
