@@ -1,0 +1,60 @@
+# PowerShell
+*.ps1xml
+*_profile.ps1
+
+# Staging and temporary directories
+StigPrep/
+C:\StigPrep/
+
+# Log files
+*.log
+*.txt.log
+*.err
+*.error
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# Windows artifacts
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# PowerShell module cache
+PSGetModuleInfo.xml
+
+# Credential files
+*.credential
+*.cred
+*password*
+*secret*
+
+# Archived files (consider removing from repo)
+*.zip
+*.7z
+*.rar
+
+# Build artifacts
+bin/
+obj/
+out/
+
+# IDE and Editor files
+.vscode/
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Mac files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Temporary files
+*.tmp
+*.temp
+~$*
